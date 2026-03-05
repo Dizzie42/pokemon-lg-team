@@ -7,6 +7,286 @@ const typeColors = {
   Ghost:"#6c3483",Dragon:"#2e4bce",Steel:"#708090",Fighting:"#e8622a",
 };
 
+// ─── POKÉDEX DATA ───────────────────────────────────────────────────────────
+const pokedexData = [
+  // Starters
+  {id:"001",name:"Bulbasaur",types:["Grass","Poison"],sprite:"🌿",how:"Starter choice from Professor Oak (Pallet Town)"},
+  {id:"002",name:"Ivysaur",types:["Grass","Poison"],sprite:"🌿",how:"Evolve Bulbasaur at Lv.16"},
+  {id:"003",name:"Venusaur",types:["Grass","Poison"],sprite:"🌿",how:"Evolve Ivysaur at Lv.32"},
+  {id:"004",name:"Charmander",types:["Fire"],sprite:"🔥",how:"Starter choice from Professor Oak (Pallet Town)"},
+  {id:"005",name:"Charmeleon",types:["Fire"],sprite:"🔥",how:"Evolve Charmander at Lv.16"},
+  {id:"006",name:"Charizard",types:["Fire","Flying"],sprite:"🔥",how:"Evolve Charmeleon at Lv.36"},
+  {id:"007",name:"Squirtle",types:["Water"],sprite:"💧",how:"Starter choice from Professor Oak (Pallet Town)"},
+  {id:"008",name:"Wartortle",types:["Water"],sprite:"💧",how:"Evolve Squirtle at Lv.16"},
+  {id:"009",name:"Blastoise",types:["Water"],sprite:"💧",how:"Evolve Wartortle at Lv.36"},
+  {id:"010",name:"Caterpie",types:["Bug"],sprite:"🐛",how:"LeafGreen exclusive — Routes 2, 24, 25; Viridian Forest"},
+  {id:"011",name:"Metapod",types:["Bug"],sprite:"🐛",how:"Evolve Caterpie at Lv.7; Viridian Forest"},
+  {id:"012",name:"Butterfree",types:["Bug","Flying"],sprite:"🦋",how:"Evolve Metapod at Lv.10"},
+  {id:"013",name:"Weedle",types:["Bug","Poison"],sprite:"🐛",how:"FireRed exclusive — trade or import"},
+  {id:"014",name:"Kakuna",types:["Bug","Poison"],sprite:"🐛",how:"FireRed exclusive — trade or import"},
+  {id:"015",name:"Beedrill",types:["Bug","Poison"],sprite:"🐝",how:"FireRed exclusive — trade or import"},
+  {id:"016",name:"Pidgey",types:["Normal","Flying"],sprite:"🐦",how:"Routes 1, 2, 5, 6, 7, 8, 12, 13, 14, 15"},
+  {id:"017",name:"Pidgeotto",types:["Normal","Flying"],sprite:"🐦",how:"Evolve Pidgey at Lv.18; Routes 13, 14, 15"},
+  {id:"018",name:"Pidgeot",types:["Normal","Flying"],sprite:"🐦",how:"Evolve Pidgeotto at Lv.36"},
+  {id:"019",name:"Rattata",types:["Normal"],sprite:"🐭",how:"Routes 1, 22, 23; many early routes"},
+  {id:"020",name:"Raticate",types:["Normal"],sprite:"🐭",how:"Evolve Rattata at Lv.20; Routes 16, 17, 18"},
+  {id:"021",name:"Spearow",types:["Normal","Flying"],sprite:"🐦",how:"Routes 3, 4, 9, 10, 11, 16, 17, 18, 22, 23"},
+  {id:"022",name:"Fearow",types:["Normal","Flying"],sprite:"🦅",how:"Evolve Spearow at Lv.20; Routes 16, 17, 18, 23"},
+  {id:"023",name:"Ekans",types:["Poison"],sprite:"🐍",how:"FireRed exclusive — trade or import"},
+  {id:"024",name:"Arbok",types:["Poison"],sprite:"🐍",how:"FireRed exclusive — trade or import"},
+  {id:"025",name:"Pikachu",types:["Electric"],sprite:"⚡",how:"Viridian Forest; Power Plant"},
+  {id:"026",name:"Raichu",types:["Electric"],sprite:"⚡",how:"Evolve Pikachu with Thunder Stone (Celadon Dept Store)"},
+  {id:"027",name:"Sandshrew",types:["Ground"],sprite:"🏜️",how:"LeafGreen exclusive — Routes 4, 22 (rare)"},
+  {id:"028",name:"Sandslash",types:["Ground"],sprite:"🏜️",how:"Evolve Sandshrew at Lv.22"},
+  {id:"029",name:"Nidoran♀",types:["Poison"],sprite:"💜",how:"Routes 22, 23; Safari Zone"},
+  {id:"030",name:"Nidorina",types:["Poison"],sprite:"💜",how:"Evolve Nidoran♀ at Lv.16; Safari Zone"},
+  {id:"031",name:"Nidoqueen",types:["Poison","Ground"],sprite:"💜",how:"Evolve Nidorina with Moon Stone"},
+  {id:"032",name:"Nidoran♂",types:["Poison"],sprite:"💙",how:"Routes 22, 23; Safari Zone"},
+  {id:"033",name:"Nidorino",types:["Poison"],sprite:"💙",how:"Evolve Nidoran♂ at Lv.16; Safari Zone"},
+  {id:"034",name:"Nidoking",types:["Poison","Ground"],sprite:"👑",how:"Evolve Nidorino with Moon Stone (Mt. Moon / Route 2)"},
+  {id:"035",name:"Clefairy",types:["Normal"],sprite:"🌙",how:"Mt. Moon (common); Clefairy appear near Moon Stone"},
+  {id:"036",name:"Clefable",types:["Normal"],sprite:"🌙",how:"Evolve Clefairy with Moon Stone"},
+  {id:"037",name:"Vulpix",types:["Fire"],sprite:"🦊",how:"LeafGreen exclusive — Routes 7, 8"},
+  {id:"038",name:"Ninetales",types:["Fire"],sprite:"🦊",how:"Evolve Vulpix with Fire Stone (Celadon Dept Store)"},
+  {id:"039",name:"Jigglypuff",types:["Normal"],sprite:"🎤",how:"Routes 3, 115 (post-National Dex); Lv.1 trade w/ Abra"},
+  {id:"040",name:"Wigglytuff",types:["Normal"],sprite:"🎤",how:"Evolve Jigglypuff with Moon Stone"},
+  {id:"041",name:"Zubat",types:["Poison","Flying"],sprite:"🦇",how:"Mt. Moon, Rock Tunnel, Seafoam Islands, Victory Road — any cave"},
+  {id:"042",name:"Golbat",types:["Poison","Flying"],sprite:"🦇",how:"Evolve Zubat at Lv.22; Victory Road, Seafoam Islands"},
+  {id:"043",name:"Oddish",types:["Grass","Poison"],sprite:"🌿",how:"LeafGreen exclusive — Routes 5, 6, 7, 8, 12, 13, 14, 15"},
+  {id:"044",name:"Gloom",types:["Grass","Poison"],sprite:"🌿",how:"Evolve Oddish at Lv.21; Routes 12–15 (rare)"},
+  {id:"045",name:"Vileplume",types:["Grass","Poison"],sprite:"🌺",how:"Evolve Gloom with Leaf Stone (Celadon Dept Store)"},
+  {id:"046",name:"Paras",types:["Bug","Grass"],sprite:"🍄",how:"Mt. Moon, Safari Zone"},
+  {id:"047",name:"Parasect",types:["Bug","Grass"],sprite:"🍄",how:"Evolve Paras at Lv.24; Safari Zone"},
+  {id:"048",name:"Venonat",types:["Bug","Poison"],sprite:"🐛",how:"Routes 12, 13, 14, 15, 24, 25; Safari Zone"},
+  {id:"049",name:"Venomoth",types:["Bug","Poison"],sprite:"🦋",how:"Evolve Venonat at Lv.31; Safari Zone"},
+  {id:"050",name:"Diglett",types:["Ground"],sprite:"🕳️",how:"Diglett's Cave (between Route 2 and Vermilion)"},
+  {id:"051",name:"Dugtrio",types:["Ground"],sprite:"🕳️",how:"Evolve Diglett at Lv.26; Diglett's Cave (rare)"},
+  {id:"052",name:"Meowth",types:["Normal"],sprite:"🐱",how:"FireRed exclusive — trade or import"},
+  {id:"053",name:"Persian",types:["Normal"],sprite:"🐱",how:"FireRed exclusive — trade or import"},
+  {id:"054",name:"Psyduck",types:["Water"],sprite:"🦆",how:"LeafGreen exclusive — Seafoam Islands, Routes 23, 25 (surf)"},
+  {id:"055",name:"Golduck",types:["Water"],sprite:"🦆",how:"Evolve Psyduck at Lv.33; Seafoam Islands"},
+  {id:"056",name:"Mankey",types:["Fighting"],sprite:"🐒",how:"FireRed exclusive — trade or import"},
+  {id:"057",name:"Primeape",types:["Fighting"],sprite:"🐒",how:"FireRed exclusive — trade or import"},
+  {id:"058",name:"Growlithe",types:["Fire"],sprite:"🔥",how:"FireRed exclusive — trade or import"},
+  {id:"059",name:"Arcanine",types:["Fire"],sprite:"🔥",how:"Evolve Growlithe (FireRed) with Fire Stone — trade"},
+  {id:"060",name:"Poliwag",types:["Water"],sprite:"🌀",how:"Routes 22, 23; Safari Zone; surf various routes"},
+  {id:"061",name:"Poliwhirl",types:["Water"],sprite:"🌀",how:"Evolve Poliwag at Lv.25; Safari Zone"},
+  {id:"062",name:"Poliwrath",types:["Water","Fighting"],sprite:"🌀",how:"Evolve Poliwhirl with Water Stone"},
+  {id:"063",name:"Abra",types:["Psychic"],sprite:"🥄",how:"Routes 24, 25 — use Poké Ball immediately (teleports turn 1)"},
+  {id:"064",name:"Kadabra",types:["Psychic"],sprite:"🥄",how:"Evolve Abra at Lv.16"},
+  {id:"065",name:"Alakazam",types:["Psychic"],sprite:"🥄",how:"Trade evolution only — trade Kadabra (skippable, use Kadabra)"},
+  {id:"066",name:"Machop",types:["Fighting"],sprite:"💪",how:"Mt. Moon, Rock Tunnel, Victory Road; Trade from NPC in Vermilion"},
+  {id:"067",name:"Machoke",types:["Fighting"],sprite:"💪",how:"Evolve Machop at Lv.28; Victory Road"},
+  {id:"068",name:"Machamp",types:["Fighting"],sprite:"💪",how:"Trade evolution only — trade Machoke"},
+  {id:"069",name:"Bellsprout",types:["Grass","Poison"],sprite:"🌱",how:"FireRed exclusive — trade or import"},
+  {id:"070",name:"Weepinbell",types:["Grass","Poison"],sprite:"🌱",how:"FireRed exclusive — trade or import"},
+  {id:"071",name:"Victreebel",types:["Grass","Poison"],sprite:"🌱",how:"FireRed exclusive — trade or import"},
+  {id:"072",name:"Tentacool",types:["Water","Poison"],sprite:"🎐",how:"Surfing on most ocean routes (very common)"},
+  {id:"073",name:"Tentacruel",types:["Water","Poison"],sprite:"🎐",how:"Evolve Tentacool at Lv.30; surfing on routes 19–21"},
+  {id:"074",name:"Geodude",types:["Rock","Ground"],sprite:"🪨",how:"Mt. Moon, Rock Tunnel, Seafoam Islands, Victory Road"},
+  {id:"075",name:"Graveler",types:["Rock","Ground"],sprite:"🪨",how:"Evolve Geodude at Lv.25; Seafoam Islands, Victory Road"},
+  {id:"076",name:"Golem",types:["Rock","Ground"],sprite:"🪨",how:"Trade evolution only — trade Graveler"},
+  {id:"077",name:"Ponyta",types:["Fire"],sprite:"🐴",how:"Routes 17 (Cycling Road — rare encounter)"},
+  {id:"078",name:"Rapidash",types:["Fire"],sprite:"🐴",how:"Evolve Ponyta at Lv.40"},
+  {id:"079",name:"Slowpoke",types:["Water","Psychic"],sprite:"🌊",how:"Routes 12, 13 (surf/fish); Safari Zone"},
+  {id:"080",name:"Slowbro",types:["Water","Psychic"],sprite:"🌊",how:"Evolve Slowpoke at Lv.37"},
+  {id:"081",name:"Magnemite",types:["Electric","Steel"],sprite:"🧲",how:"Power Plant, Routes 10 (near Power Plant)"},
+  {id:"082",name:"Magneton",types:["Electric","Steel"],sprite:"🧲",how:"Evolve Magnemite at Lv.30; Power Plant"},
+  {id:"083",name:"Farfetch'd",types:["Normal","Flying"],sprite:"🦆",how:"In-game trade: give Spearow to NPC in Vermilion City"},
+  {id:"084",name:"Doduo",types:["Normal","Flying"],sprite:"🐦",how:"Routes 16, 17, 18, 22 (rare)"},
+  {id:"085",name:"Dodrio",types:["Normal","Flying"],sprite:"🦅",how:"Evolve Doduo at Lv.31; Routes 17 (rare)"},
+  {id:"086",name:"Seel",types:["Water"],sprite:"🦭",how:"Seafoam Islands (surfing or walking lower floors)"},
+  {id:"087",name:"Dewgong",types:["Water","Ice"],sprite:"🦭",how:"Evolve Seel at Lv.34; Seafoam Islands"},
+  {id:"088",name:"Grimer",types:["Poison"],sprite:"☣️",how:"FireRed exclusive — trade or import"},
+  {id:"089",name:"Muk",types:["Poison"],sprite:"☣️",how:"FireRed exclusive — trade or import"},
+  {id:"090",name:"Shellder",types:["Water"],sprite:"🐚",how:"LeafGreen exclusive — Routes 6, 11, 20, 21 (Super Rod)"},
+  {id:"091",name:"Cloyster",types:["Water","Ice"],sprite:"🐚",how:"Evolve Shellder with Water Stone"},
+  {id:"092",name:"Gastly",types:["Ghost","Poison"],sprite:"👻",how:"Pokémon Tower (Lavender Town) — all floors"},
+  {id:"093",name:"Haunter",types:["Ghost","Poison"],sprite:"👻",how:"Evolve Gastly at Lv.25; Pokémon Tower upper floors"},
+  {id:"094",name:"Gengar",types:["Ghost","Poison"],sprite:"👻",how:"Trade evolution only — trade Haunter"},
+  {id:"095",name:"Onix",types:["Rock","Ground"],sprite:"🐍",how:"Rock Tunnel, Victory Road, Brock's Gym (trade)"},
+  {id:"096",name:"Drowzee",types:["Psychic"],sprite:"😴",how:"Routes 11, 12 (grass)"},
+  {id:"097",name:"Hypno",types:["Psychic"],sprite:"😴",how:"Evolve Drowzee at Lv.26"},
+  {id:"098",name:"Krabby",types:["Water"],sprite:"🦀",how:"Routes 6, 11, 25 (Old Rod / Good Rod); Seafoam Islands"},
+  {id:"099",name:"Kingler",types:["Water"],sprite:"🦀",how:"Evolve Krabby at Lv.28"},
+  {id:"100",name:"Voltorb",types:["Electric"],sprite:"💣",how:"Power Plant; also disguised as items (be careful!)"},
+  {id:"101",name:"Electrode",types:["Electric"],sprite:"💣",how:"Evolve Voltorb at Lv.30; Power Plant"},
+  {id:"102",name:"Exeggcute",types:["Grass","Psychic"],sprite:"🥚",how:"Safari Zone (common)"},
+  {id:"103",name:"Exeggutor",types:["Grass","Psychic"],sprite:"🌴",how:"Evolve Exeggcute with Leaf Stone"},
+  {id:"104",name:"Cubone",types:["Ground"],sprite:"💀",how:"Pokémon Tower (Lavender Town); Safari Zone"},
+  {id:"105",name:"Marowak",types:["Ground"],sprite:"💀",how:"Evolve Cubone at Lv.28 (boss version in Pokémon Tower is ghost, uncatchable)"},
+  {id:"106",name:"Hitmonlee",types:["Fighting"],sprite:"💥",how:"Saffron City Fighting Dojo — choose one of two prizes after beating it"},
+  {id:"107",name:"Hitmonchan",types:["Fighting"],sprite:"🥊",how:"Saffron City Fighting Dojo — choose one of two prizes (Hitmonlee or Hitmonchan)"},
+  {id:"108",name:"Lickitung",types:["Normal"],sprite:"👅",how:"In-game trade: give Slowbro to NPC on Route 18"},
+  {id:"109",name:"Koffing",types:["Poison"],sprite:"☁️",how:"FireRed exclusive — trade or import"},
+  {id:"110",name:"Weezing",types:["Poison"],sprite:"☁️",how:"FireRed exclusive — trade or import"},
+  {id:"111",name:"Rhyhorn",types:["Ground","Rock"],sprite:"🦏",how:"Safari Zone (common in various areas); Victory Road"},
+  {id:"112",name:"Rhydon",types:["Ground","Rock"],sprite:"🦏",how:"Evolve Rhyhorn at Lv.42; Victory Road (rare)"},
+  {id:"113",name:"Chansey",types:["Normal"],sprite:"🥚",how:"Safari Zone (rare); Pokémon Tower (rare)"},
+  {id:"114",name:"Tangela",types:["Grass"],sprite:"🌿",how:"LeafGreen exclusive — Routes 21 (south of Pallet, surf)"},
+  {id:"115",name:"Kangaskhan",types:["Normal"],sprite:"🦘",how:"Safari Zone (uncommon)"},
+  {id:"116",name:"Horsea",types:["Water"],sprite:"🐴",how:"LeafGreen exclusive — Routes 19, 20, 21 (Super Rod)"},
+  {id:"117",name:"Seadra",types:["Water"],sprite:"🐴",how:"Evolve Horsea at Lv.32"},
+  {id:"118",name:"Goldeen",types:["Water"],sprite:"🐠",how:"Routes 12, 13, Safari Zone (Old/Good Rod)"},
+  {id:"119",name:"Seaking",types:["Water"],sprite:"🐠",how:"Evolve Goldeen at Lv.33; routes via Super Rod"},
+  {id:"120",name:"Staryu",types:["Water"],sprite:"⭐",how:"LeafGreen exclusive — Routes 19, 20, 21 (Super Rod / surfing)"},
+  {id:"121",name:"Starmie",types:["Water","Psychic"],sprite:"⭐",how:"Evolve Staryu with Water Stone (Celadon Dept Store)"},
+  {id:"122",name:"Mr. Mime",types:["Psychic"],sprite:"🎭",how:"In-game trade: give Clefairy to NPC on Route 2 (south, requires Cut)"},
+  {id:"123",name:"Scyther",types:["Bug","Flying"],sprite:"⚔️",how:"FireRed exclusive — Safari Zone or Game Corner"},
+  {id:"124",name:"Jynx",types:["Ice","Psychic"],sprite:"💋",how:"Seafoam Islands (walking floors B1–B4); also in-game trade for Poliwhirl"},
+  {id:"125",name:"Electabuzz",types:["Electric"],sprite:"⚡",how:"FireRed exclusive — Power Plant"},
+  {id:"126",name:"Magmar",types:["Fire"],sprite:"🔥",how:"LeafGreen exclusive — Pokémon Mansion (Cinnabar Island)"},
+  {id:"127",name:"Pinsir",types:["Bug"],sprite:"🦀",how:"LeafGreen exclusive — Safari Zone (rare)"},
+  {id:"128",name:"Tauros",types:["Normal"],sprite:"🐂",how:"Safari Zone (uncommon)"},
+  {id:"129",name:"Magikarp",types:["Water"],sprite:"🐟",how:"Old Rod anywhere (very common); sold for ₽500 by NPC on Route 4"},
+  {id:"130",name:"Gyarados",types:["Water","Flying"],sprite:"🐉",how:"Evolve Magikarp at Lv.20; also in Lake of Rage (post-National Dex)"},
+  {id:"131",name:"Lapras",types:["Water","Ice"],sprite:"🧊",how:"FREE gift from Silph Co. employee on 7F after defeating Team Rocket"},
+  {id:"132",name:"Ditto",types:["Normal"],sprite:"🔵",how:"Pokémon Mansion (Cinnabar); Cerulean Cave (post-game)"},
+  {id:"133",name:"Eevee",types:["Normal"],sprite:"🦊",how:"FREE from Celadon City Mansion (back entrance, top floor)"},
+  {id:"134",name:"Vaporeon",types:["Water"],sprite:"💧",how:"Evolve Eevee with Water Stone"},
+  {id:"135",name:"Jolteon",types:["Electric"],sprite:"⚡",how:"Evolve Eevee with Thunder Stone (Celadon Dept Store 4F)"},
+  {id:"136",name:"Flareon",types:["Fire"],sprite:"🔥",how:"Evolve Eevee with Fire Stone"},
+  {id:"137",name:"Porygon",types:["Normal"],sprite:"🤖",how:"Celadon Game Corner — 9999 coins"},
+  {id:"138",name:"Omanyte",types:["Rock","Water"],sprite:"🐚",how:"Revive from Dome Fossil (Mt. Moon) at Cinnabar Island Lab"},
+  {id:"139",name:"Omastar",types:["Rock","Water"],sprite:"🐚",how:"Evolve Omanyte at Lv.40"},
+  {id:"140",name:"Kabuto",types:["Rock","Water"],sprite:"🦀",how:"Revive from Helix Fossil (Mt. Moon) at Cinnabar Island Lab"},
+  {id:"141",name:"Kabutops",types:["Rock","Water"],sprite:"🦀",how:"Evolve Kabuto at Lv.40"},
+  {id:"142",name:"Aerodactyl",types:["Rock","Flying"],sprite:"🦖",how:"Revive from Old Amber (Pewter Museum back room) at Cinnabar Island Lab"},
+  {id:"143",name:"Snorlax",types:["Normal"],sprite:"😴",how:"Route 12 AND Route 16 — use Pokéflute (from Lavender Tower) to wake"},
+  {id:"144",name:"Articuno",types:["Ice","Flying"],sprite:"❄️",how:"LEGENDARY — Seafoam Islands B4F (requires Surf + Strength)"},
+  {id:"145",name:"Zapdos",types:["Electric","Flying"],sprite:"⚡",how:"LEGENDARY — Power Plant (requires Surf)"},
+  {id:"146",name:"Moltres",types:["Fire","Flying"],sprite:"🔥",how:"LEGENDARY — Mt. Ember (Kindle Road on One Island, post-game)"},
+  {id:"147",name:"Dratini",types:["Dragon"],sprite:"🐲",how:"Safari Zone (surf on the fishing pond area); Game Corner Celadon (4600 coins)"},
+  {id:"148",name:"Dragonair",types:["Dragon"],sprite:"🐲",how:"Evolve Dratini at Lv.30"},
+  {id:"149",name:"Dragonite",types:["Dragon","Flying"],sprite:"🐉",how:"Evolve Dragonair at Lv.55"},
+  {id:"150",name:"Mewtwo",types:["Psychic"],sprite:"🧬",how:"LEGENDARY — Cerulean Cave B1F (post-game, requires all 8 badges + Elite Four)"},
+  {id:"151",name:"Mew",types:["Psychic"],sprite:"✨",how:"Event only — not obtainable in normal gameplay"},
+];
+
+// ─── TM/HM DATA ─────────────────────────────────────────────────────────────
+const tmhmData = [
+  {id:"TM01",name:"Focus Punch",type:"Fighting",power:"150",cat:"Physical",where:"Silph Co. 2F"},
+  {id:"TM02",name:"Dragon Claw",type:"Dragon",power:"80",cat:"Physical",where:"Victory Road 1F"},
+  {id:"TM03",name:"Water Pulse",type:"Water",power:"60",cat:"Special",where:"Misty (Cerulean Gym reward)"},
+  {id:"TM04",name:"Calm Mind",type:"Psychic",power:"—",cat:"Status",where:"Sabrina (Saffron Gym reward)"},
+  {id:"TM05",name:"Roar",type:"Normal",power:"—",cat:"Status",where:"Route 4"},
+  {id:"TM06",name:"Toxic",type:"Poison",power:"—",cat:"Status",where:"Koga (Fuchsia Gym reward)"},
+  {id:"TM07",name:"Hail",type:"Ice",power:"—",cat:"Status",where:"Icefall Cave (One Island — post-game)"},
+  {id:"TM08",name:"Bulk Up",type:"Fighting",power:"—",cat:"Status",where:"Chuck — wait, FRLG: Brawly reward / Route 10 North"},
+  {id:"TM09",name:"Bullet Seed",type:"Grass",power:"10×",cat:"Physical",where:"Route 6"},
+  {id:"TM10",name:"Hidden Power",type:"Normal",power:"60",cat:"Special",where:"Game Corner Celadon (3000 coins) or Route 2"},
+  {id:"TM11",name:"Sunny Day",type:"Fire",power:"—",cat:"Status",where:"Mt. Ember (One Island area)"},
+  {id:"TM12",name:"Taunt",type:"Dark",power:"—",cat:"Status",where:"Route 6 (south)"},
+  {id:"TM13",name:"Ice Beam",type:"Ice",power:"95",cat:"Special",where:"Seafoam Islands OR Game Corner (4000 coins) — highest priority TM"},
+  {id:"TM14",name:"Blizzard",type:"Ice",power:"120",cat:"Special",where:"Celadon Dept Store (5F, ₽5500)"},
+  {id:"TM15",name:"Hyper Beam",type:"Normal",power:"150",cat:"Special",where:"Celadon Dept Store (5F, ₽7500)"},
+  {id:"TM16",name:"Light Screen",type:"Psychic",power:"—",cat:"Status",where:"Celadon Dept Store (5F, ₽3000)"},
+  {id:"TM17",name:"Protect",type:"Normal",power:"—",cat:"Status",where:"Celadon Dept Store (5F, ₽3000)"},
+  {id:"TM18",name:"Rain Dance",type:"Water",power:"—",cat:"Status",where:"Mt. Ember (One Island area)"},
+  {id:"TM19",name:"Giga Drain",type:"Grass",power:"60",cat:"Special",where:"Erika (Celadon Gym reward) — must beat Erika"},
+  {id:"TM20",name:"Safeguard",type:"Normal",power:"—",cat:"Status",where:"Celadon Dept Store (5F, ₽3000)"},
+  {id:"TM21",name:"Frustration",type:"Normal",power:"varies",cat:"Physical",where:"Rocket Hideout (Celadon)"},
+  {id:"TM22",name:"SolarBeam",type:"Grass",power:"120",cat:"Special",where:"Pokémon Mansion (Cinnabar Island)"},
+  {id:"TM23",name:"Iron Tail",type:"Steel",power:"100",cat:"Physical",where:"Pokémon Tower (Lavender Town) — upper floors"},
+  {id:"TM24",name:"Thunderbolt",type:"Electric",power:"95",cat:"Special",where:"Game Corner Celadon (4000 coins) or Lt. Surge reward — top priority"},
+  {id:"TM25",name:"Thunder",type:"Electric",power:"120",cat:"Special",where:"Celadon Dept Store (5F, ₽5500)"},
+  {id:"TM26",name:"Earthquake",type:"Ground",power:"100",cat:"Physical",where:"Silph Co. (Giovanni drops it after battle)"},
+  {id:"TM27",name:"Return",type:"Normal",power:"up to 102",cat:"Physical",where:"Various NPCs (Pallet Town, One Island)"},
+  {id:"TM28",name:"Dig",type:"Ground",power:"80",cat:"Physical",where:"Route 11 (NPC gift)"},
+  {id:"TM29",name:"Psychic",type:"Psychic",power:"90",cat:"Special",where:"Saffron City (Mr. Psychic's house) or Game Corner (3500 coins)"},
+  {id:"TM30",name:"Shadow Ball",type:"Ghost",power:"80",cat:"Special",where:"Pokémon Tower (Lavender Town) — top floor"},
+  {id:"TM31",name:"Brick Break",type:"Fighting",power:"75",cat:"Physical",where:"Silph Co. 7F"},
+  {id:"TM32",name:"Double Team",type:"Normal",power:"—",cat:"Status",where:"Game Corner Celadon (1500 coins)"},
+  {id:"TM33",name:"Reflect",type:"Psychic",power:"—",cat:"Status",where:"Celadon Dept Store (5F, ₽3000)"},
+  {id:"TM34",name:"Shock Wave",type:"Electric",power:"60",cat:"Special",where:"Lt. Surge (Vermilion Gym reward)"},
+  {id:"TM35",name:"Flamethrower",type:"Fire",power:"95",cat:"Special",where:"Game Corner Celadon (4000 coins) or Blaine reward"},
+  {id:"TM36",name:"Sludge Bomb",type:"Poison",power:"90",cat:"Special",where:"Rocket Hideout (Celadon basement)"},
+  {id:"TM37",name:"Sandstorm",type:"Rock",power:"—",cat:"Status",where:"Route 4 / Desert area"},
+  {id:"TM38",name:"Fire Blast",type:"Fire",power:"120",cat:"Special",where:"Celadon Dept Store (5F, ₽5500)"},
+  {id:"TM39",name:"Rock Tomb",type:"Rock",power:"60",cat:"Physical",where:"Brock (Pewter Gym reward)"},
+  {id:"TM40",name:"Aerial Ace",type:"Flying",power:"60",cat:"Physical",where:"Route 9 (NPC gift)"},
+  {id:"TM41",name:"Torment",type:"Dark",power:"—",cat:"Status",where:"Rocket Hideout (Celadon)"},
+  {id:"TM42",name:"Facade",type:"Normal",power:"70",cat:"Physical",where:"Pewter City (NPC after beating Brock)"},
+  {id:"TM43",name:"Secret Power",type:"Normal",power:"70",cat:"Physical",where:"Route 23 / various"},
+  {id:"TM44",name:"Rest",type:"Psychic",power:"—",cat:"Status",where:"Celadon Dept Store (5F, ₽3000)"},
+  {id:"TM45",name:"Attract",type:"Normal",power:"—",cat:"Status",where:"Celadon Dept Store (4F)"},
+  {id:"TM46",name:"Thief",type:"Dark",power:"60",cat:"Physical",where:"Rocket Hideout (Celadon)"},
+  {id:"TM47",name:"Steel Wing",type:"Steel",power:"70",cat:"Physical",where:"Route 2 (south, requires Cut)"},
+  {id:"TM48",name:"Skill Swap",type:"Psychic",power:"—",cat:"Status",where:"Silph Co."},
+  {id:"TM49",name:"Snatch",type:"Dark",power:"—",cat:"Status",where:"Rocket Hideout / S.S. Anne"},
+  {id:"TM50",name:"Overheat",type:"Fire",power:"140",cat:"Special",where:"Blaine (Cinnabar Gym reward)"},
+  {id:"HM01",name:"Cut",type:"Normal",power:"50",cat:"Physical",where:"S.S. Anne Captain's room (Vermilion) — required for many paths"},
+  {id:"HM02",name:"Fly",type:"Flying",power:"70",cat:"Physical",where:"Route 16 (gift from girl in house past Cut tree)"},
+  {id:"HM03",name:"Surf",type:"Water",power:"95",cat:"Special",where:"Safari Zone Warden's gift (after returning Gold Teeth)"},
+  {id:"HM04",name:"Strength",type:"Normal",power:"80",cat:"Physical",where:"Safari Zone Warden (give Gold Teeth found in Safari Zone)"},
+  {id:"HM05",name:"Flash",type:"Normal",power:"—",cat:"Status",where:"Route 2 (NPC south of Viridian Forest, requires Cut)"},
+  {id:"HM06",name:"Rock Smash",type:"Fighting",power:"20",cat:"Physical",where:"One Island (post-game)"},
+  {id:"HM07",name:"Waterfall",type:"Water",power:"80",cat:"Physical",where:"Icefall Cave (One Island — post-game)"},
+];
+
+// ─── KEY ITEMS / PROGRESSION CHECKLIST ──────────────────────────────────────
+const checklistData = [
+  {
+    phase:"Early Game", color:"#3d9e50",
+    items:[
+      {id:"c1", text:"Choose Bulbasaur as starter (Pallet Town — Professor Oak's Lab)"},
+      {id:"c2", text:"Catch Nidoran♂ on Route 22 early — Moon Stone → Nidoking ASAP"},
+      {id:"c3", text:"Get Potion / PokéBalls from Oak's Lab before first route"},
+      {id:"c4", text:"Pick up Moon Stone in Mt. Moon — evolve Nidorino immediately"},
+      {id:"c5", text:"Grab the Old Rod from Vermilion City fisherman (catch Magikarp optionally)"},
+      {id:"c6", text:"Get TM28 Dig from Route 11 NPC (free, useful escape + move)"},
+      {id:"c7", text:"Board S.S. Anne → get HM01 Cut from captain"},
+      {id:"c8", text:"Beat Lt. Surge → get Thunder Badge (enables Fly use)"},
+    ]
+  },
+  {
+    phase:"Mid Game", color:"#2980b9",
+    items:[
+      {id:"c9", text:"Get Bike Voucher from Vermilion fan club chairman → exchange in Cerulean Bike Shop"},
+      {id:"c10", text:"Catch Abra on Routes 24/25 — use Poké Ball turn 1 before it Teleports"},
+      {id:"c11", text:"Beat Erika (Celadon Gym) → get TM19 Giga Drain"},
+      {id:"c12", text:"Get Eevee from Celadon Mansion rooftop (back entrance) — evolve to Jolteon"},
+      {id:"c13", text:"Buy TM24 Thunderbolt + TM13 Ice Beam at Celadon Game Corner — top priority"},
+      {id:"c14", text:"Get TM36 Sludge Bomb from Rocket Hideout (Celadon basement)"},
+      {id:"c15", text:"Get Silph Scope from Rocket Hideout — needed to identify Ghost-types in Lavender Tower"},
+      {id:"c16", text:"Rescue Mr. Fuji in Pokémon Tower → receive Pokéflute"},
+      {id:"c17", text:"Wake Snorlax on Route 12 or Route 16 with Pokéflute — catch it"},
+      {id:"c18", text:"Get HM03 Surf from Safari Zone Warden (give Gold Teeth)"},
+      {id:"c19", text:"Get HM04 Strength from Safari Zone Warden (same exchange as Surf)"},
+      {id:"c20", text:"Beat Koga (Fuchsia Gym) → get Soul Badge (enables Surf use)"},
+    ]
+  },
+  {
+    phase:"Late Game", color:"#8e44ad",
+    items:[
+      {id:"c21", text:"Get Lapras for FREE on Silph Co. 7F after defeating Team Rocket (or skip for Starmie)"},
+      {id:"c22", text:"Get TM26 Earthquake — Giovanni drops it after Silph Co. battle"},
+      {id:"c23", text:"Beat Sabrina (Saffron Gym) → get TM04 Calm Mind"},
+      {id:"c24", text:"Get HM02 Fly from girl's house on Route 16 (past Cut tree)"},
+      {id:"c25", text:"Catch Staryu (LeafGreen) on Routes 19–21 via Super Rod → evolve with Water Stone"},
+      {id:"c26", text:"Get Good Rod from NPC in Fuschia City (fishing guru's house)"},
+      {id:"c27", text:"Get Super Rod from NPC on Route 12"},
+      {id:"c28", text:"Revive fossils at Cinnabar Island Lab (Dome/Helix + Old Amber)"},
+      {id:"c29", text:"Beat Blaine (Cinnabar Gym) → get TM50 Overheat"},
+      {id:"c30", text:"Beat Giovanni (Viridian Gym) → get Earth Badge (enables all HMs)"},
+      {id:"c31", text:"Get TM29 Psychic from Mr. Psychic's house in Saffron City (free!)"},
+    ]
+  },
+  {
+    phase:"Elite Four Prep", color:"#e74c3c",
+    items:[
+      {id:"c32", text:"Stock 20+ Full Restores and 10+ Revives before Victory Road"},
+      {id:"c33", text:"Ensure team is Lv.50+ (ideally 55+) before entering Victory Road"},
+      {id:"c34", text:"Teach Ice Beam to Lapras or Starmie — essential for Lance's Dragons"},
+      {id:"c35", text:"Teach Thunderbolt to Jolteon or Nidoking — covers Lorelei's Water/Ice types"},
+      {id:"c36", text:"Make sure Kadabra knows Psychic + Shadow Ball — handles Bruno and Agatha"},
+      {id:"c37", text:"Grab TM26 Earthquake if you haven't — mandatory for Nidoking"},
+      {id:"c38", text:"Get TM44 Rest from Celadon Dept Store for Snorlax — makes it nearly unkillable"},
+      {id:"c39", text:"Beat Victory Road and challenge the Elite Four — good luck!"},
+    ]
+  },
+];
+
 const teams = [
   {
     id: "A",
@@ -447,14 +727,14 @@ export default function App() {
       </div>
 
       {/* Sub tabs */}
-      <div style={{display:"flex",borderBottom:"1px solid rgba(255,255,255,0.07)",background:"rgba(0,0,0,0.25)",padding:"0 24px"}}>
-        {[["team","🎮 Pokémon Detail"],["e4","⚔️ Elite Four Guide"],["compare","📊 Team Compare"]].map(([t,label])=>(
+      <div style={{display:"flex",borderBottom:"1px solid rgba(255,255,255,0.07)",background:"rgba(0,0,0,0.25)",padding:"0 24px",overflowX:"auto",flexWrap:"nowrap"}}>
+        {[["team","🎮 Pokémon Detail"],["e4","⚔️ Elite Four"],["compare","📊 Team Compare"],["pokedex","📖 Pokédex"],["tmhm","💿 TM / HM"],["checklist","✅ Checklist"]].map(([t,label])=>(
           <button key={t} onClick={()=>setTab(t)} style={{
-            background:"none",border:"none",cursor:"pointer",padding:"12px 16px",
-            fontSize:"12px",letterSpacing:"1.5px",textTransform:"uppercase",fontFamily:"inherit",
-            color: tab===t ? team.accentColor : "#607a70",
+            background:"none",border:"none",cursor:"pointer",padding:"12px 14px",
+            fontSize:"11px",letterSpacing:"1px",textTransform:"uppercase",fontFamily:"inherit",
+            color: tab===t ? team.accentColor : "#607a70",whiteSpace:"nowrap",
             borderBottom: tab===t ? `2px solid ${team.accentColor}` : "2px solid transparent",
-            transition:"all 0.2s",
+            transition:"all 0.2s",flexShrink:0,
           }}>{label}</button>
         ))}
       </div>
@@ -658,6 +938,287 @@ export default function App() {
           </div>
         </div>
       )}
+      {/* POKÉDEX TAB */}
+      {tab==="pokedex" && <PokedexTab accentColor={team.accentColor}/>}
+
+      {/* TM/HM TAB */}
+      {tab==="tmhm" && <TmhmTab accentColor={team.accentColor}/>}
+
+      {/* CHECKLIST TAB */}
+      {tab==="checklist" && <ChecklistTab accentColor={team.accentColor}/>}
+
+    </div>
+  );
+}
+
+// ─── POKÉDEX TAB ─────────────────────────────────────────────────────────────
+function PokedexTab({accentColor}) {
+  const [search, setSearch] = useState("");
+  const [typeFilter, setTypeFilter] = useState("All");
+  const [expanded, setExpanded] = useState(null);
+  const allTypes = ["All","Grass","Poison","Fire","Water","Ice","Electric","Psychic","Normal","Flying","Ground","Rock","Bug","Ghost","Dragon","Steel","Fighting"];
+
+  const filtered = pokedexData.filter(p => {
+    const matchSearch = p.name.toLowerCase().includes(search.toLowerCase()) || p.how.toLowerCase().includes(search.toLowerCase());
+    const matchType = typeFilter==="All" || p.types.includes(typeFilter);
+    return matchSearch && matchType;
+  });
+
+  const numericId = (id) => parseInt(id, 10);
+  const spriteUrl   = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${numericId(id)}.png`;
+  const artworkUrl  = (id) => `https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/${numericId(id)}.png`;
+  const primaryType = (p) => p.types[0];
+
+  return (
+    <div style={{padding:"24px",position:"relative"}}>
+      <div style={{fontSize:"10px",letterSpacing:"3px",color:accentColor,textTransform:"uppercase",marginBottom:"6px"}}>Reference</div>
+      <h2 style={{margin:"0 0 6px",fontSize:"20px",color:"#f0ead0"}}>Pokédex — All LeafGreen Pokémon & How to Get Them</h2>
+      <p style={{margin:"0 0 18px",fontSize:"12px",color:"#607a70"}}>Click any card to expand with full official artwork.</p>
+
+      {/* Filters */}
+      <div style={{display:"flex",gap:"10px",marginBottom:"18px",flexWrap:"wrap"}}>
+        <input
+          value={search} onChange={e=>setSearch(e.target.value)}
+          placeholder="Search Pokémon or location..."
+          style={{flex:1,minWidth:"200px",background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.12)",borderRadius:"6px",padding:"8px 12px",color:"#e8e0d0",fontFamily:"inherit",fontSize:"13px",outline:"none"}}
+        />
+        <select value={typeFilter} onChange={e=>setTypeFilter(e.target.value)}
+          style={{background:"#111820",border:"1px solid rgba(255,255,255,0.12)",borderRadius:"6px",padding:"8px 12px",color:"#e8e0d0",fontFamily:"inherit",fontSize:"13px",cursor:"pointer"}}>
+          {allTypes.map(t=><option key={t} value={t} style={{background:"#111820"}}>{t}</option>)}
+        </select>
+      </div>
+      <div style={{fontSize:"12px",color:"#506050",marginBottom:"14px"}}>{filtered.length} Pokémon shown</div>
+
+      {/* Grid */}
+      <div style={{display:"grid",gridTemplateColumns:"repeat(auto-fill,minmax(150px,1fr))",gap:"8px"}}>
+        {filtered.map(p => {
+          const mainColor = typeColors[primaryType(p)] || "#607070";
+          return (
+            <div key={p.id} onClick={()=>setExpanded(expanded?.id===p.id ? null : p)}
+              style={{
+                background:`linear-gradient(160deg, ${mainColor}18, rgba(255,255,255,0.02))`,
+                border:`1px solid ${mainColor}33`,
+                borderRadius:"10px", padding:"12px 10px", cursor:"pointer",
+                textAlign:"center", transition:"all 0.18s",
+                boxShadow: expanded?.id===p.id ? `0 0 16px ${mainColor}44` : "none",
+                transform: expanded?.id===p.id ? "scale(1.03)" : "scale(1)",
+              }}>
+              {/* Pixel sprite */}
+              <div style={{height:"64px",display:"flex",alignItems:"center",justifyContent:"center"}}>
+                <img
+                  src={spriteUrl(p.id)}
+                  alt={p.name}
+                  style={{imageRendering:"pixelated",maxHeight:"64px",maxWidth:"64px"}}
+                  onError={e=>{e.target.style.display="none";}}
+                />
+              </div>
+              <div style={{fontSize:"9px",color:mainColor,marginBottom:"3px",letterSpacing:"1px"}}>#{p.id}</div>
+              <div style={{fontSize:"12px",fontWeight:"bold",color:"#f0ead0",marginBottom:"5px"}}>{p.name}</div>
+              <div style={{display:"flex",gap:"3px",justifyContent:"center",flexWrap:"wrap"}}>
+                {p.types.map(t=>(
+                  <span key={t} style={{fontSize:"8px",background:typeColors[t]||"#607070",color:"white",borderRadius:"3px",padding:"1px 5px",fontWeight:"bold"}}>{t}</span>
+                ))}
+              </div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Expanded modal overlay */}
+      {expanded && (
+        <div onClick={()=>setExpanded(null)} style={{
+          position:"fixed",top:0,left:0,right:0,bottom:0,
+          background:"rgba(0,0,0,0.75)",zIndex:200,
+          display:"flex",alignItems:"center",justifyContent:"center",
+          backdropFilter:"blur(4px)",padding:"20px",
+        }}>
+          <div onClick={e=>e.stopPropagation()} style={{
+            background:"linear-gradient(135deg,#0d1b2a,#0a0f1a)",
+            border:`1px solid ${typeColors[primaryType(expanded)]||"#607070"}55`,
+            borderRadius:"16px",padding:"28px",maxWidth:"480px",width:"100%",
+            boxShadow:`0 0 60px ${typeColors[primaryType(expanded)]||"#607070"}22`,
+            position:"relative",
+          }}>
+            {/* Close */}
+            <button onClick={()=>setExpanded(null)} style={{
+              position:"absolute",top:"14px",right:"14px",background:"rgba(255,255,255,0.08)",
+              border:"1px solid rgba(255,255,255,0.1)",borderRadius:"50%",width:"28px",height:"28px",
+              cursor:"pointer",color:"#8a9a90",fontSize:"14px",display:"flex",alignItems:"center",justifyContent:"center",
+            }}>✕</button>
+
+            <div style={{display:"flex",gap:"20px",alignItems:"flex-start"}}>
+              {/* Official artwork */}
+              <div style={{
+                flexShrink:0,width:"140px",height:"140px",
+                background:`radial-gradient(circle, ${typeColors[primaryType(expanded)]||"#607070"}22 0%, transparent 70%)`,
+                display:"flex",alignItems:"center",justifyContent:"center",borderRadius:"12px",
+              }}>
+                <img
+                  src={artworkUrl(expanded.id)}
+                  alt={expanded.name}
+                  style={{maxWidth:"130px",maxHeight:"130px",objectFit:"contain",filter:"drop-shadow(0 4px 12px rgba(0,0,0,0.5))"}}
+                  onError={e=>{e.target.src=spriteUrl(expanded.id); e.target.style.imageRendering="pixelated";}}
+                />
+              </div>
+
+              {/* Details */}
+              <div style={{flex:1}}>
+                <div style={{fontSize:"10px",color:typeColors[primaryType(expanded)]||"#607070",letterSpacing:"3px",textTransform:"uppercase",marginBottom:"4px"}}>#{expanded.id}</div>
+                <div style={{fontSize:"22px",fontWeight:"bold",color:"#f0ead0",marginBottom:"8px"}}>{expanded.name}</div>
+                <div style={{display:"flex",gap:"5px",marginBottom:"14px",flexWrap:"wrap"}}>
+                  {expanded.types.map(t=>(
+                    <span key={t} style={{fontSize:"11px",background:typeColors[t]||"#607070",color:"white",borderRadius:"4px",padding:"3px 10px",fontWeight:"bold"}}>{t}</span>
+                  ))}
+                </div>
+                <div style={{fontSize:"10px",color:typeColors[primaryType(expanded)]||"#607070",letterSpacing:"2px",textTransform:"uppercase",marginBottom:"6px"}}>How to Obtain</div>
+                <div style={{fontSize:"13px",color:"#b0c0b8",lineHeight:"1.7",background:"rgba(255,255,255,0.03)",borderRadius:"8px",padding:"10px 12px",border:"1px solid rgba(255,255,255,0.06)"}}>
+                  {expanded.how}
+                </div>
+
+                {/* Pixel sprite small preview */}
+                <div style={{marginTop:"12px",display:"flex",alignItems:"center",gap:"8px"}}>
+                  <img src={spriteUrl(expanded.id)} alt="" style={{imageRendering:"pixelated",width:"40px",height:"40px",opacity:0.7}}/>
+                  <span style={{fontSize:"10px",color:"#506050",fontStyle:"italic"}}>Gen III pixel sprite</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+    </div>
+  );
+}
+
+// ─── TM/HM TAB ───────────────────────────────────────────────────────────────
+function TmhmTab({accentColor}) {
+  const [search, setSearch] = useState("");
+  const [filter, setFilter] = useState("All");
+  const filtered = tmhmData.filter(tm => {
+    const matchSearch = tm.name.toLowerCase().includes(search.toLowerCase()) ||
+      tm.where.toLowerCase().includes(search.toLowerCase()) ||
+      tm.id.toLowerCase().includes(search.toLowerCase());
+    const matchFilter = filter==="All" || (filter==="HM" ? tm.id.startsWith("HM") : tm.id.startsWith("TM"));
+    return matchSearch && matchFilter;
+  });
+  const catColor = {Physical:"#e8622a",Special:"#2980b9",Status:"#8e44ad"};
+  return (
+    <div style={{padding:"24px"}}>
+      <div style={{fontSize:"10px",letterSpacing:"3px",color:accentColor,textTransform:"uppercase",marginBottom:"6px"}}>Reference</div>
+      <h2 style={{margin:"0 0 6px",fontSize:"20px",color:"#f0ead0"}}>TM & HM List</h2>
+      <p style={{margin:"0 0 18px",fontSize:"13px",color:"#607a70"}}>All TMs and HMs available in Pokémon LeafGreen, what they do, and exactly where to find them.</p>
+      <div style={{display:"flex",gap:"10px",marginBottom:"18px",flexWrap:"wrap"}}>
+        <input
+          value={search} onChange={e=>setSearch(e.target.value)}
+          placeholder="Search move name or location..."
+          style={{flex:1,minWidth:"200px",background:"rgba(255,255,255,0.05)",border:"1px solid rgba(255,255,255,0.12)",borderRadius:"6px",padding:"8px 12px",color:"#e8e0d0",fontFamily:"inherit",fontSize:"13px",outline:"none"}}
+        />
+        {["All","TM","HM"].map(f=>(
+          <button key={f} onClick={()=>setFilter(f)} style={{
+            background: filter===f ? accentColor : "rgba(255,255,255,0.05)",
+            border:`1px solid ${filter===f ? accentColor : "rgba(255,255,255,0.1)"}`,
+            borderRadius:"6px",padding:"8px 16px",cursor:"pointer",color: filter===f?"#fff":"#8a9a90",
+            fontSize:"12px",fontFamily:"inherit",transition:"all 0.2s",
+          }}>{f}</button>
+        ))}
+      </div>
+      <div style={{overflowX:"auto"}}>
+        <table style={{width:"100%",borderCollapse:"collapse",minWidth:"600px"}}>
+          <thead>
+            <tr style={{borderBottom:"1px solid rgba(255,255,255,0.1)"}}>
+              {["ID","Move","Type","Power","Cat.","Where to Get"].map(h=>(
+                <th key={h} style={{padding:"10px 12px",textAlign:"left",fontSize:"10px",letterSpacing:"2px",textTransform:"uppercase",color:"#607a70"}}>{h}</th>
+              ))}
+            </tr>
+          </thead>
+          <tbody>
+            {filtered.map((tm,i)=>(
+              <tr key={tm.id} style={{borderBottom:"1px solid rgba(255,255,255,0.04)",background: i%2===0?"transparent":"rgba(255,255,255,0.015)"}}>
+                <td style={{padding:"10px 12px"}}>
+                  <span style={{
+                    fontSize:"11px",fontWeight:"bold",
+                    color: tm.id.startsWith("HM") ? "#f1c40f" : accentColor,
+                    background: tm.id.startsWith("HM") ? "rgba(241,196,15,0.12)" : `${accentColor}15`,
+                    border:`1px solid ${tm.id.startsWith("HM") ? "rgba(241,196,15,0.3)" : accentColor+"44"}`,
+                    borderRadius:"4px",padding:"2px 7px",
+                  }}>{tm.id}</span>
+                </td>
+                <td style={{padding:"10px 12px",fontSize:"13px",fontWeight:"bold",color:"#e8e0d0"}}>{tm.name}</td>
+                <td style={{padding:"10px 12px"}}>
+                  <span style={{fontSize:"10px",background:typeColors[tm.type]||"#607070",color:"white",borderRadius:"3px",padding:"2px 7px"}}>{tm.type}</span>
+                </td>
+                <td style={{padding:"10px 12px",fontSize:"13px",color:"#a0b0a8",textAlign:"center"}}>{tm.power}</td>
+                <td style={{padding:"10px 12px"}}>
+                  <span style={{fontSize:"10px",color:catColor[tm.cat]||"#8a9a90",background:`${catColor[tm.cat]||"#607070"}15`,borderRadius:"3px",padding:"2px 7px"}}>{tm.cat}</span>
+                </td>
+                <td style={{padding:"10px 12px",fontSize:"12px",color:"#8aa0a0"}}>{tm.where}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </div>
+  );
+}
+
+// ─── CHECKLIST TAB ────────────────────────────────────────────────────────────
+function ChecklistTab({accentColor}) {
+  const [checked, setChecked] = useState({});
+  const toggle = id => setChecked(prev => ({...prev, [id]: !prev[id]}));
+  const totalItems = checklistData.flatMap(p=>p.items).length;
+  const totalChecked = Object.values(checked).filter(Boolean).length;
+  const pct = Math.round((totalChecked/totalItems)*100);
+  return (
+    <div style={{padding:"24px",maxWidth:"820px"}}>
+      <div style={{fontSize:"10px",letterSpacing:"3px",color:accentColor,textTransform:"uppercase",marginBottom:"6px"}}>Playthrough</div>
+      <h2 style={{margin:"0 0 6px",fontSize:"20px",color:"#f0ead0"}}>Key Items & Progression Checklist</h2>
+      <p style={{margin:"0 0 18px",fontSize:"13px",color:"#607a70"}}>Everything you need to do in order. Check off items as you go.</p>
+      {/* Progress bar */}
+      <div style={{marginBottom:"24px",padding:"14px 18px",background:"rgba(255,255,255,0.03)",border:"1px solid rgba(255,255,255,0.07)",borderRadius:"10px"}}>
+        <div style={{display:"flex",justifyContent:"space-between",alignItems:"center",marginBottom:"8px"}}>
+          <span style={{fontSize:"12px",color:"#8aa0a0"}}>Overall Progress</span>
+          <span style={{fontSize:"14px",fontWeight:"bold",color:accentColor}}>{totalChecked} / {totalItems} ({pct}%)</span>
+        </div>
+        <div style={{height:"6px",background:"rgba(255,255,255,0.08)",borderRadius:"3px"}}>
+          <div style={{height:"100%",width:`${pct}%`,background:`linear-gradient(90deg,${accentColor},${accentColor}aa)`,borderRadius:"3px",transition:"width 0.4s"}}/>
+        </div>
+      </div>
+      {checklistData.map(phase=>{
+        const phaseChecked = phase.items.filter(item=>checked[item.id]).length;
+        return (
+          <div key={phase.phase} style={{marginBottom:"22px"}}>
+            <div style={{display:"flex",alignItems:"center",gap:"10px",marginBottom:"10px"}}>
+              <div style={{fontSize:"11px",fontWeight:"bold",color:phase.color,letterSpacing:"2px",textTransform:"uppercase"}}>{phase.phase}</div>
+              <div style={{fontSize:"10px",color:"#506050"}}>{phaseChecked}/{phase.items.length}</div>
+              <div style={{flex:1,height:"1px",background:`${phase.color}33`}}/>
+            </div>
+            <div style={{display:"grid",gap:"6px"}}>
+              {phase.items.map(item=>(
+                <div key={item.id} onClick={()=>toggle(item.id)} style={{
+                  display:"flex",alignItems:"flex-start",gap:"12px",padding:"11px 14px",
+                  borderRadius:"7px",cursor:"pointer",userSelect:"none",
+                  background: checked[item.id] ? `${phase.color}12` : "rgba(255,255,255,0.025)",
+                  border:`1px solid ${checked[item.id] ? phase.color+"44" : "rgba(255,255,255,0.06)"}`,
+                  transition:"all 0.15s",
+                }}>
+                  <div style={{
+                    width:"18px",height:"18px",minWidth:"18px",borderRadius:"4px",marginTop:"1px",
+                    border:`2px solid ${checked[item.id] ? phase.color : "rgba(255,255,255,0.2)"}`,
+                    background: checked[item.id] ? phase.color : "transparent",
+                    display:"flex",alignItems:"center",justifyContent:"center",
+                    fontSize:"11px",color:"white",transition:"all 0.15s",
+                  }}>{checked[item.id] ? "✓" : ""}</div>
+                  <span style={{
+                    fontSize:"13px",lineHeight:"1.5",
+                    color: checked[item.id] ? "#607a70" : "#c0d0c8",
+                    textDecoration: checked[item.id] ? "line-through" : "none",
+                    transition:"all 0.15s",
+                  }}>{item.text}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        );
+      })}
     </div>
   );
 }
